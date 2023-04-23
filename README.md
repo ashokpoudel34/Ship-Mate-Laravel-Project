@@ -1,6 +1,7 @@
 # Ship-Mate-Laravel-Project
 
 #Import sql file to your sql server from phpmyadmin
+
 #Edit mysql database credentials in .env file
 
 
