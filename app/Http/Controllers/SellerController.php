@@ -94,7 +94,7 @@ class SellerController extends Controller
         ]);
 
         $user_otp = $request->input('userotp');
-        if ($user_otp == "12345") {
+        if ($user_otp == "8848") {
             $request->session()->flash('otp_verified', true);
             return redirect()->route("site.seller.seller_login");
         } else {
