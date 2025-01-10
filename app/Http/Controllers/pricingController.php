@@ -8,6 +8,6 @@ class pricingController extends Controller
 {
     public function pricing()
     {
-        return view('pricing');
+        return view('HomePage.pricing');
     }
 }

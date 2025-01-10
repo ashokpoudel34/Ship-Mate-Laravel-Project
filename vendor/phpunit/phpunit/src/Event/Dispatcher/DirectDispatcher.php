@@ -52,8 +52,8 @@ final class DirectDispatcher implements SubscribableDispatcher
             throw new UnknownSubscriberTypeException(
                 sprintf(
                     'Subscriber "%s" does not implement any known interface - did you forget to register it?',
-                    $subscriber::class
-                )
+                    $subscriber::class,
+                ),
             );
         }
 
@@ -67,6 +67,7 @@ final class DirectDispatcher implements SubscribableDispatcher
     }
 
     /**
+     * @throws Throwable
      * @throws UnknownEventTypeException
      */
     public function dispatch(Event $event): void
@@ -77,8 +78,8 @@ final class DirectDispatcher implements SubscribableDispatcher
             throw new UnknownEventTypeException(
                 sprintf(
                     'Unknown event type "%s"',
-                    $eventClassName
-                )
+                    $eventClassName,
+                ),
             );
         }
 
@@ -86,7 +87,7 @@ final class DirectDispatcher implements SubscribableDispatcher
             try {
                 $tracer->trace($event);
             } catch (Throwable $t) {
-                $this->ignoreThrowablesFromThirdPartySubscribers($t);
+                $this->handleThrowable($t);
             }
         }
 
@@ -98,7 +99,7 @@ final class DirectDispatcher implements SubscribableDispatcher
             try {
                 $subscriber->notify($event);
             } catch (Throwable $t) {
-                $this->ignoreThrowablesFromThirdPartySubscribers($t);
+                $this->handleThrowable($t);
             }
         }
     }
@@ -106,10 +107,26 @@ final class DirectDispatcher implements SubscribableDispatcher
     /**
      * @throws Throwable
      */
-    private function ignoreThrowablesFromThirdPartySubscribers(Throwable $t): void
+    public function handleThrowable(Throwable $t): void
     {
-        if (str_starts_with($t->getFile(), dirname(__DIR__, 2))) {
-            throw $t;
+        if ($this->isThrowableFromThirdPartySubscriber($t)) {
+            Facade::emitter()->testRunnerTriggeredWarning(
+                sprintf(
+                    'Exception in third-party event subscriber: %s%s%s',
+                    $t->getMessage(),
+                    PHP_EOL,
+                    $t->getTraceAsString(),
+                ),
+            );
+
+            return;
         }
+
+        throw $t;
+    }
+
+    private function isThrowableFromThirdPartySubscriber(Throwable $t): bool
+    {
+        return !str_starts_with($t->getFile(), dirname(__DIR__, 2));
     }
 }
