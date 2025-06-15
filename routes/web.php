@@ -153,59 +153,59 @@ Route::post('/profile', [SellerController::class, "EditProfile"]);
 
 
 ///////////COMMENT THIS PART WHILE MIGRATING DATABASE///////////////////////
-// $users = shipmate::get();
-// $router = app()->make('router');
-// foreach($users as $data){
-//     $router->get($data->link , [MainController::class, 'HomePage'])->name($data->link . 'homepage');
+$users = shipmate::get();
+$router = app()->make('router');
+foreach($users as $data){
+    $router->get($data->link , [MainController::class, 'HomePage'])->name($data->link . 'homepage');
 
-//     //////////////////////////////////RESTAURANT///////////////////////////////////////////
-// // if ($data->theme_id == 0) {
-//     // $router->get($data->link , [RestaurantHomeController::class, 'HomePage'])->name($data->link . '.homepage');
-//     $router->get($data->link.'#book-a-table' , [MainController::class, 'HomePage'])->name($data->link . '.tablebooked');
-//     $router->get($data->link.'#contact' , [MainController::class, 'HomePage'])->name($data->link . '.contactsuccess');
-//     $router->post($data->link . '/booking', [RestaurantHomeController::class, 'Booking'])->name('booking'.$data->link);
-//     $router->post($data->link . '/contact', [RestaurantHomeController::class, 'Contact'])->name('contact'.$data->link);
+    //////////////////////////////////RESTAURANT///////////////////////////////////////////
+// if ($data->theme_id == 0) {
+    // $router->get($data->link , [RestaurantHomeController::class, 'HomePage'])->name($data->link . '.homepage');
+    $router->get($data->link.'#book-a-table' , [MainController::class, 'HomePage'])->name($data->link . '.tablebooked');
+    $router->get($data->link.'#contact' , [MainController::class, 'HomePage'])->name($data->link . '.contactsuccess');
+    $router->post($data->link . '/booking', [RestaurantHomeController::class, 'Booking'])->name('booking'.$data->link);
+    $router->post($data->link . '/contact', [RestaurantHomeController::class, 'Contact'])->name('contact'.$data->link);
 
 
-// //////////////////////////////////Ecommerce Store///////////////////////////////////////////
-// // if ($data->theme_id == 1) {
-// //     $router->get($data->link , [EcomHomeController::class, 'HexaShop'])->name($data->link . '.homepage');
-//     Route::view($data->link . '/single-page', 'SellerWebsite.HexaShop.single-product');
-//     Route::view($data->link . '/products-page', 'SellerWebsite.HexaShop.products');
-//     Route::view($data->link . '/about-page', 'SellerWebsite.HexaShop.about');
-//     Route::view($data->link . '/contact-page', 'SellerWebsite.HexaShop.contact');
-// // }
-
-// //////////////////////////////////Electric Shop///////////////////////////////////////////
-// // if ($data->theme_id == 2) {
-//     // $router->get($data->link , [ElecHomeController::class, 'ElecShop'])->name($data->link . '.homepage');
-// // }
-
-// //////////////////////////////////Gift Shop///////////////////////////////////////////
-// // if ($data->theme_id == 3) {
-// //     $router->get($data->link , [GiftShopHomeController::class, 'GiftShop'])->name('giftshop');
-
-// Route::get($data->link . '/login', [GiftShopLoginController::class, "Login"])->name($data->link . 'giftshop.login');
-// Route::post($data->link . '/login', [GiftShopLoginController::class, "Login_process"]);
-// Route::get($data->link . '/signup', [GiftShopLoginController::class, "Signup"])->name($data->link . 'giftshop.signup');
-// Route::post($data->link . '/signup', [GiftShopLoginController::class, "Signup_process"]);
-// Route::get($data->link . '/signup/verify', [GiftShopLoginController::class, "otp"])->name($data->link . 'giftshop.otp');
-// Route::post($data->link . '/signup/verify', [GiftShopLoginController::class, "otp_process"]);
-// Route::get($data->link . '/reset', [GiftShopLoginController::class, "Reset"])->name($data->link . 'giftshop.reset');
-// Route::post($data->link . '/reset', [GiftShopLoginController::class, "Reset_process"]);
-// Route::get($data->link . '/reset/verify', [GiftShopLoginController::class, "resetotp"])->name($data->link . 'giftshop.resetotp');
-// Route::post($data->link . '/reset/verify', [GiftShopLoginController::class, "resetotp_process"]);
-// Route::get($data->link . '/reset/password', [GiftShopLoginController::class, "resetpassword"])->name($data->link . 'giftshop.resetpassword');
-// Route::post($data->link . '/reset/password', [GiftShopLoginController::class, "resetpassword_process"]);
-
-// Route::get($data->link . '/dashboard', [GiftShopHomeController::class, "Dashboard"])->middleware("auth:giftshop")->name($data->link . 'giftshop.dashboard');
-//     Route::get($data->link . '/about', [GiftShopHomeController::class, "About"])->name($data->link . 'giftshop.about');
-//     Route::get($data->link . '/contact', [GiftShopHomeController::class, "Contact"])->name($data->link . 'giftshop.contact');
-//     Route::get($data->link . '/product', [GiftShopHomeController::class, "Product"])->name($data->link . 'giftshop.product');
-//     Route::get($data->link . '/detail', [GiftShopHomeController::class, "Detail"])->name($data->link . 'giftshop.detail');
-//     Route::get($data->link . '/cart', [GiftShopHomeController::class, "Cart"])->name($data->link . 'giftshop.cart');
-
+//////////////////////////////////Ecommerce Store///////////////////////////////////////////
+// if ($data->theme_id == 1) {
+//     $router->get($data->link , [EcomHomeController::class, 'HexaShop'])->name($data->link . '.homepage');
+    Route::view($data->link . '/single-page', 'SellerWebsite.HexaShop.single-product');
+    Route::view($data->link . '/products-page', 'SellerWebsite.HexaShop.products');
+    Route::view($data->link . '/about-page', 'SellerWebsite.HexaShop.about');
+    Route::view($data->link . '/contact-page', 'SellerWebsite.HexaShop.contact');
 // }
+
+//////////////////////////////////Electric Shop///////////////////////////////////////////
+// if ($data->theme_id == 2) {
+    // $router->get($data->link , [ElecHomeController::class, 'ElecShop'])->name($data->link . '.homepage');
+// }
+
+//////////////////////////////////Gift Shop///////////////////////////////////////////
+// if ($data->theme_id == 3) {
+//     $router->get($data->link , [GiftShopHomeController::class, 'GiftShop'])->name('giftshop');
+
+Route::get($data->link . '/login', [GiftShopLoginController::class, "Login"])->name($data->link . 'giftshop.login');
+Route::post($data->link . '/login', [GiftShopLoginController::class, "Login_process"]);
+Route::get($data->link . '/signup', [GiftShopLoginController::class, "Signup"])->name($data->link . 'giftshop.signup');
+Route::post($data->link . '/signup', [GiftShopLoginController::class, "Signup_process"]);
+Route::get($data->link . '/signup/verify', [GiftShopLoginController::class, "otp"])->name($data->link . 'giftshop.otp');
+Route::post($data->link . '/signup/verify', [GiftShopLoginController::class, "otp_process"]);
+Route::get($data->link . '/reset', [GiftShopLoginController::class, "Reset"])->name($data->link . 'giftshop.reset');
+Route::post($data->link . '/reset', [GiftShopLoginController::class, "Reset_process"]);
+Route::get($data->link . '/reset/verify', [GiftShopLoginController::class, "resetotp"])->name($data->link . 'giftshop.resetotp');
+Route::post($data->link . '/reset/verify', [GiftShopLoginController::class, "resetotp_process"]);
+Route::get($data->link . '/reset/password', [GiftShopLoginController::class, "resetpassword"])->name($data->link . 'giftshop.resetpassword');
+Route::post($data->link . '/reset/password', [GiftShopLoginController::class, "resetpassword_process"]);
+
+Route::get($data->link . '/dashboard', [GiftShopHomeController::class, "Dashboard"])->middleware("auth:giftshop")->name($data->link . 'giftshop.dashboard');
+    Route::get($data->link . '/about', [GiftShopHomeController::class, "About"])->name($data->link . 'giftshop.about');
+    Route::get($data->link . '/contact', [GiftShopHomeController::class, "Contact"])->name($data->link . 'giftshop.contact');
+    Route::get($data->link . '/product', [GiftShopHomeController::class, "Product"])->name($data->link . 'giftshop.product');
+    Route::get($data->link . '/detail', [GiftShopHomeController::class, "Detail"])->name($data->link . 'giftshop.detail');
+    Route::get($data->link . '/cart', [GiftShopHomeController::class, "Cart"])->name($data->link . 'giftshop.cart');
+
+}
 // }
 //////////////////////////////////////////////////////////////////////////////////////
 
