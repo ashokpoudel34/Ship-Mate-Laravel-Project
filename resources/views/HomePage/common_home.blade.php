@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row gy-4 d-flex justify-content-between">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h2 data-aos="fade-up">Not Welcome to our Automated Ecommerce Website Creation Service!</h2>
+          <h2 data-aos="fade-up">Welcome to our Automated Ecommerce Website Creation Service!</h2>
           <p data-aos="fade-up" data-aos-delay="100">Start your journey to ecommerce success today! Sign up for our automated ecommerce website creation service and unlock the potential to launch your online store effortlessly. Get ready to reach a global audience and grow your business with ease and convenience.</p>
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
